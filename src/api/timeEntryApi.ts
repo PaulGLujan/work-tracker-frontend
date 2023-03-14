@@ -1,23 +1,23 @@
 import { del, get, post } from "./restMethods";
-import { Appointment, CreateAppointment } from "../types/appointmentTypes";
+import { CreateTimeEntry, TimeEntry } from "../types/timeEntryTypes";
 import { RespStatus } from "../types/apiTypes";
 
-export const getAppointmentsByUserId = async (
+export const getTimeEntriesByUserId = async (
   userId: number
-): Promise<Appointment[]> => {
+): Promise<TimeEntry[]> => {
   try {
-    return await get(`appointment/${userId}`);
+    return await get(`timeentry/${userId}`);
   } catch (error) {
     console.error(error);
     return [];
   }
 };
 
-export const createAppointment = async (
-  appointment: CreateAppointment
+export const createTimeEntry = async (
+  timeEntry: CreateTimeEntry
 ): Promise<{ status: RespStatus; id: number | null }> => {
   try {
-    return await post("appointment", appointment);
+    return await post("timeentry", timeEntry);
   } catch (error) {
     console.error(error);
     return { status: "failed", id: null };
@@ -28,7 +28,7 @@ export const deleteAppointment = async (
   id: number
 ): Promise<{ status: RespStatus }> => {
   try {
-    return await del(`appointment/${id}`);
+    return await del(`timeentry/${id}`);
   } catch (error) {
     console.error(error);
     return { status: "failed" };
